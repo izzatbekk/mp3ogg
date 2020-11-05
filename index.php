@@ -35,10 +35,9 @@ if ($message->audio) {
 $path = bot('getFile',['file_id'=>$message->audio->file_id])->result->file_path;
 $file = "https://api.telegram.org/file/bot$HTTP_API/$path";
 file_put_contents("$chat_id.mp3", file_get_contents($file));
-exec("ffmpeg -ss 30 -t 30 -i ".$chat_id.".mp3 -acodec copy ".$chat_id."_out.mp3");
-rename("$chat_id_out.mp3", "$chat_id_out.ogg");
+exec("ffmpeg -ss 30 -t 30 -i ".$chat_id.".mp3 -c:a libvorbis -b 8 ".$chat_id.".ogg");
 bot('sendVoice',[
 'chat_id'=>$chat_id,
-'voice'=>new CURLFile($chat_id_out.ogg)
+'voice'=>new CURLFile($chat_id.".ogg")
 ]);
 }
