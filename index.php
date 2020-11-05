@@ -44,6 +44,7 @@ file_put_contents("data/$chat_id.mp3", file_get_contents($file));
 exec("ffmpeg -ss 30 -t 30 -i data/".$chat_id.".mp3 -c:a libvorbis -b 8 data/".$chat_id.".ogg");
 bot('sendVoice',[
 'chat_id'=>$chat_id,
+'duration' => 30,
 'voice'=>new CURLFile("data/".$chat_id.".ogg")
 ]);
 unlink("data/$chat_id.mp3");
