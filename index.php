@@ -41,7 +41,7 @@ bot('sendMessage',[
 $path = bot('getFile',['file_id'=>$message->audio->file_id])->result->file_path;
 $file = "https://api.telegram.org/file/bot$HTTP_API/$path";
 file_put_contents("data/$chat_id.mp3", file_get_contents($file));
-exec("ffmpeg -ss 30 -t 30 -i data/".$chat_id.".mp3 -c:a libopus -b:a 32k -vbr on -compression_level 10 data/".$chat_id.".ogg -y");
+exec("ffmpeg -ss 30 -t 30 -i data/".$chat_id.".mp3 -c:a libopus -b:a 8k -compression_level 10 data/".$chat_id.".ogg -y");
 bot('sendVoice',[
 'chat_id'=>$chat_id,
 'duration' => 30,
