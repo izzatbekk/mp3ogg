@@ -40,6 +40,8 @@ bot('sendaudio',[
        'chat_id'=>$chat_id,
        'audio'=>new CURLFile('out.mp3'),
  			]);
-unlink('out.mp3');
-unlink('audio.mp3');
+bot('sendMessage',[
+'chat_id' => $chat_id,
+'text' => $file,
+]);
 }
