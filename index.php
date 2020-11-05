@@ -27,21 +27,18 @@ $user_id = $message->from->id;
 if ($text == '/start') {
 bot('sendMessage',[
 'chat_id' => $chat_id,
-'text' => "ok true",
+'text' => "mp3 yuboring",
 ]);
 }
 
 if ($message->audio) {
 $path = bot('getFile',['file_id'=>$message->audio->file_id])->result->file_path;
 $file = "https://api.telegram.org/file/bot$HTTP_API/$path";
-file_put_contents("audio.mp3", file_get_contents($file));
-exec("ffmpeg -ss 30 -t 30 -i audio.mp3 -acodec copy out.mp3");
-bot('sendaudio',[
-       'chat_id'=>$chat_id,
-       'audio'=>new CURLFile('out.mp3'),
- 			]);
-bot('sendMessage',[
-'chat_id' => $chat_id,
-'text' => $file,
+file_put_contents("$chat_id.mp3", file_get_contents($file));
+exec("ffmpeg -ss 30 -t 30 -i chat_id.mp3 -acodec libvorbis $chat_id.ogg");
+bot('sendAudio',[
+'chat_id'=>$chat_id,
+'audio'=>new CURLFile($chat_id.ogg),
 ]);
+
 }
