@@ -49,9 +49,7 @@ $id3_tags = mp3_get_tags($chat_id.".mp3");
 bot('sendVoice',[
 'chat_id' => $chat_id,
 'voice' => new CURLFile("data/".$chat_id.".ogg"),
-'caption' => "$id3_tags["title"]
-$id3_tags["album"]
-$id3_tags["artist"]"
+'caption' => $id3_tags['title'].$id3_tags['album'].$id3_tags['artist']
 ]);
 unlink("data/$chat_id.mp3");
 unlink("data/$chat_id.ogg");
