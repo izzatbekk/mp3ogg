@@ -1,6 +1,6 @@
 <?php
 
-$HTTP_API = '982445371:AAGLsP22TafPHCVOZj2mBzSIfoxul1i5rVI';
+$HTTP_API = '1449565555:AAFeeFHTdJN5n00av_bLDpSGsDFbRRi3EBw';
 
 function bot($method, $datas = []) {
 global $HTTP_API;
