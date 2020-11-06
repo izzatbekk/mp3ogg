@@ -29,18 +29,17 @@ if (!is_dir('./data')) mkdir('./data');
 if ($text == '/start') {
 bot('sendMessage',[
 'chat_id' => $chat_id,
-'text' => "Salom!
-Bot musiqalarni qirqish va ovozli xabar ko'rinishida yuborish uchun xizmat qiladi.
+'text' => "Hi!
+The bot serves to cut music and send in the form of voice message.
 
-Iltimos biror audio fayl (.mp3) yuboring.",
+Please send me an audio file (.mp3).",
 ]);
 }
 
 if ($message->audio) {
-if (!$chat_id.".mp3") { 
 bot('sendMessage',[
 'chat_id' => $chat_id,
-'text' => "Yuklanmoqda iltimos kuting.",
+'text' => "Sending, please wait..",
 ]);
 $path = bot('getFile',['file_id' =>$message->audio->file_id])->result->file_path;
 $file = "https://api.telegram.org/file/bot$HTTP_API/$path";
@@ -52,10 +51,4 @@ bot('sendVoice',[
 ]);
 unlink("data/$chat_id.mp3");
 unlink("data/$chat_id.ogg");
-} else {
-bot('sendMessage',[
-'chat_id' => $chat_id,
-'text' => "Operatsiya vaqtida musiqa yuklash mumkin emas!",
-]);
-}
 }
