@@ -37,6 +37,7 @@ Iltimos biror audio fayl (.mp3) yuboring.",
 }
 
 if ($message->audio) {
+if (!$chat_id.".mp3") { 
 bot('sendMessage',[
 'chat_id' => $chat_id,
 'text' => "Yuklanmoqda iltimos kuting.",
@@ -51,4 +52,10 @@ bot('sendVoice',[
 ]);
 unlink("data/$chat_id.mp3");
 unlink("data/$chat_id.ogg");
+} else {
+bot('sendMessage',[
+'chat_id' => $chat_id,
+'text' => "Operatsiya vaqtida musiqa yuklash mumkin emas!",
+]);
+}
 }
