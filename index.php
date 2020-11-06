@@ -45,11 +45,9 @@ $path = bot('getFile',['file_id' =>$message->audio->file_id])->result->file_path
 $file = "https://api.telegram.org/file/bot$HTTP_API/$path";
 file_put_contents("data/$chat_id.mp3", file_get_contents($file));
 exec("ffmpeg -ss 30 -t 30 -i data/".$chat_id.".mp3 -c:a libopus -b:a 16k data/".$chat_id.".ogg -y");
-$id3_tags = mp3_get_tags($chat_id.".mp3");
 bot('sendVoice',[
 'chat_id' => $chat_id,
-'voice' => new CURLFile("data/".$chat_id.".ogg"),
-'caption' => $id3_tags['title'].$id3_tags['album'].$id3_tags['artist']
+'voice' => new CURLFile("data/".$chat_id.".ogg")
 ]);
 unlink("data/$chat_id.mp3");
 unlink("data/$chat_id.ogg");
