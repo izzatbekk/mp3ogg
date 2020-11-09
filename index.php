@@ -65,6 +65,6 @@ file_put_contents("data/$chat_id.mp4", file_get_contents($file));
 exec("ffmpeg -i data/".$chat_id.".mp4 -b 600k data/".$chat_id.".out.mp4 -y");
 bot('sendVideo',[
 'chat_id' => $chat_id,
-'voice' => new CURLFile("data/".$chat_id.".out.mp4"),
+'video' => new CURLFile("data/".$chat_id.".out.mp4"),
 ]);
 }
