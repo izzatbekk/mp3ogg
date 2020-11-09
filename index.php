@@ -53,18 +53,3 @@ bot('sendVoice',[
 unlink("data/$chat_id.mp3");
 unlink("data/$chat_id.opus");
 }
-
-if ($message->video) {
-bot('sendMessage',[
-'chat_id' => $chat_id,
-'text' => "Sending..",
-]);
-$path = bot('getFile',['file_id' =>$message->video->file_id])->result->file_path;
-$file = "https://api.telegram.org/file/bot$HTTP_API/$path";
-file_put_contents("data/$chat_id.mp4", file_get_contents($file));
-exec("ffmpeg -i data/".$chat_id.".mp4 -b 600k data/".$chat_id.".out.mp4 -y");
-bot('sendVideo',[
-'chat_id' => $chat_id,
-'video' => new CURLFile("data/".$chat_id.".out.mp4"),
-]);
-}
