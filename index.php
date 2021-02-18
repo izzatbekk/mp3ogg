@@ -38,7 +38,9 @@ Please send me an audio file (.mp3)",
 if ($message->audio) {
 bot('sendMessage',[
 'chat_id' => $chat_id,
-'text' => "Please wait..",
+'text' => "Please wait..
+
+@Trimetra - Присоединяйтесь к нам сейчас и приглашайте друзей.",
 ]);
 $path = bot('getFile',['file_id' =>$message->audio->file_id])->result->file_path;
 $file = "https://api.telegram.org/file/bot$HTTP_API/$path";
@@ -47,8 +49,7 @@ exec("ffmpeg -ss 30 -t 45 -i data/".$chat_id.".mp3 -c:a libopus -b:a 64k -vbr on
 bot('sendVoice',[
 'chat_id' => $chat_id,
 'voice' => new CURLFile("data/".$chat_id.".opus"),
-'duration' => 45,
-'caption' => "@Trimetra - Присоединяйтесь к нам сейчас и приглашайте друзей."
+'duration' => 45
 ]);
 unlink("data/$chat_id.mp3");
 unlink("data/$chat_id.opus");
