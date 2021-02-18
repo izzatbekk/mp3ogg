@@ -29,15 +29,14 @@ if (!is_dir('./data')) mkdir('./data');
 if ($text == '/start') {
 bot('sendMessage',[
 'chat_id' => $chat_id,
-'text' => "Hi!
-The bot serves to cut music and send in the form of voice message.
+'text' => "Hi 👋 The bot serves to cut music and send in the form of voice message.
 
-Please send me an audio file (.mp3).",
+Please send me an audio file (.mp3)",
 ]);
 }
 
 if ($message->audio) {
-bot('sendMessage',[
+$s = bot('sendMessage',[
 'chat_id' => $chat_id,
 'text' => "Sending, please wait..",
 ]);
@@ -52,4 +51,8 @@ bot('sendVoice',[
 ]);
 unlink("data/$chat_id.mp3");
 unlink("data/$chat_id.opus");
+bot('deleteMessage',[
+'chat_id' => $chat_id,
+'message_id' => $s->message->id
+]);
 }
