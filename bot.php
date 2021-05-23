@@ -31,7 +31,7 @@ $chat_id = $message->chat->id;
 $user_id = $message->from->id;
 
 $user = mysqli_fetch_assoc(mysqli_query($connect,"SELECT * FROM mp3ogg WHERE user_id = '$user_id' LIMIT 1"));
-if ($user['user_id'] != true){
+if ($user['user_id'] != true) {
 $connect->query("INSERT INTO mp3ogg (user_id)
 VALUES ('$user_id')");
 }
