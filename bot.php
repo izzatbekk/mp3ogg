@@ -1,6 +1,6 @@
 <?php
 
-$HTTP_API = '1659715226:AAGVzT5-LczlDNgFf6F6ZLzKePQp2E1FALI';
+$HTTP_API = '982445371:AAGLsP22TafPHCVOZj2mBzSIfoxul1i5rVI';
 
 function bot($method, $datas = []) {
 global $HTTP_API;
@@ -17,11 +17,7 @@ return json_decode($result);
 }
 }
 
-$dbhost = "mysql-izzatbek.alwaysdata.net";
-$dbuser = "izzatbek";
-$dbpass = "@izzatbek00";
-$dbname = "izzatbek_db";
-$connect = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+
 
 $update = json_decode(file_get_contents('php://input'));
 $message = $update->message;
@@ -30,27 +26,19 @@ $message_id = $message->message_id;
 $chat_id = $message->chat->id;
 $user_id = $message->from->id;
 
-$user = mysqli_fetch_assoc(mysqli_query($connect,"SELECT * FROM mp3ogg WHERE user_id = '$user_id' LIMIT 1"));
-if ($user['user_id'] != true) {
-$connect->query("INSERT INTO mp3ogg (user_id)
-VALUES ('$user_id')");
-}
-
 if (!is_dir('./data')) mkdir('./data');
 
 if ($text == '/start') {
 bot('sendMessage',[
 'chat_id' => $chat_id,
-'text' => "Hi 👋 The bot serves to cut music and send in the form of voice message.
-
-Please send me an audio file (.mp3)",
+'text' => "Musiqa faylini yuboring..",
 ]);
 }
 
 if ($message->audio) {
 bot('sendMessage',[
 'chat_id' => $chat_id,
-'text' => "Please wait..
+'text' => "Iltimos kuting..
 
 @Trimetra - Присоединяйтесь к нам сейчас и приглашайте друзей.",
 ]);
@@ -65,15 +53,4 @@ bot('sendVoice',[
 ]);
 unlink("data/$chat_id.mp3");
 unlink("data/$chat_id.opus");
-}
-
-if ($text == "/stat" and $user_id == 708888699) {
-$users = mysqli_num_rows(mysqli_query($connect,"SELECT user_id FROM mp3ogg"));
-bot('sendmessage',[
-'chat_id'=> $chat_id,
-'text'=> "Bot statistikasi bilan tanishing:
-
-Foydalanuvchilar soni: <b>$users</b>",
-'parse_mode'=> 'html'
-]);
 }
