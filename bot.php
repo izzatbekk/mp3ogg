@@ -31,7 +31,7 @@ if (!is_dir('./data')) mkdir('./data');
 if ($text == '/start') {
 bot('sendMessage',[
 'chat_id' => $chat_id,
-'text' => "Musiqa faylini yuboring..",
+'text' => "Bot yordamida musiqaning 45 soniyalik qismini ovozli xabar ko'rinishida qirqib olishingiz mumkin, buning uchun botga musiqa faylini (mp3) yuboring. ",
 ]);
 }
 
